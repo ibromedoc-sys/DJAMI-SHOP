@@ -6,7 +6,7 @@ package.domain = com.djamishop
 
 source.dir = .
 source.include_exts = py,png,jpg,jpeg,webp,kv,atlas,json
-source.exclude_dirs = .git, .buildozer, bin, venv, __pycache__, vendor, web
+source.exclude_dirs = .git, .buildozer, bin, venv, .venv, __pycache__, vendor, web
 
 version = 0.2
 android.numeric_version = 2

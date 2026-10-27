@@ -36,10 +36,12 @@ directe ne sont plus utilisés. Firebase Hosting reste dédié au tableau de bor
 
 L'identifiant Android actuel est `com.djamishop.app` (`package.domain` +
 `package.name` dans `buildozer.spec`) : il doit rester identique pour publier
-des mises à jour de la même application Play. Le format de sortie release est
-configuré en Android App Bundle (`aab`) ; le workflow GitHub Actions actuel
-construit encore une APK debug de test, pas un bundle prêt à téléverser dans la
-Play Console.
+des mises à jour de la même application Play. La configuration Buildozer
+actuelle produit une APK release (`android.release_artifact = apk`). Le workflow
+GitHub Actions construit et téléverse cette APK release signée ; il nécessite
+les secrets `ANDROID_KEYSTORE_BASE64`, `ANDROID_KEYSTORE_PASSWORD`,
+`ANDROID_KEY_ALIAS` et `ANDROID_KEY_PASSWORD`. Il ne produit pas d'Android App
+Bundle (`aab`).
 
 Avant une publication Play, il faudra :
 
@@ -48,9 +50,10 @@ Avant une publication Play, il faudra :
 2. Incrémenter `android.numeric_version` à chaque publication (la version
    préparée est actuellement le code `2`) et modifier `version` pour le nom
    affiché.
-3. Compiler un bundle release signé avec la clé d'envoi configurée pour Play,
-   puis téléverser le `.aab` dans une piste de test interne avant la production.
-   Garder une sauvegarde privée de la clé d'envoi ; ne pas la committer.
+3. Configurer Buildozer et le workflow pour produire un bundle release signé
+   (`aab`) avec la clé d'envoi Play, puis téléverser le `.aab` dans une piste de
+   test interne avant la production. Garder une sauvegarde privée de la clé
+   d'envoi ; ne pas la committer.
 4. Installer la version de test depuis Play. Ensuite, Play gère la distribution
    des mises à jour selon les réglages de l'utilisateur (mises à jour
    automatiques, ou mise à jour manuelle depuis le Play Store).
