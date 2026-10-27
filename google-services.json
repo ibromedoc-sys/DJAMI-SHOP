@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "561310011115",
+    "project_id": "djami-shop",
+    "storage_bucket": "djami-shop.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561310011115:android:894966a6041fe44dc938ae",
+        "android_client_info": {
+          "package_name": "com.djamishop.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLBPs-dBmzVVelwugdXB6-5tcAnvUShRI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

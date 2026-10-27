@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="google_app_id" translatable="false">1:561310011115:android:894966a6041fe44dc938ae</string>
+    <string name="gcm_defaultSenderId" translatable="false">561310011115</string>
+    <string name="google_api_key" translatable="false">AIzaSyBLBPs-dBmzVVelwugdXB6-5tcAnvUShRI</string>
+    <string name="project_id" translatable="false">djami-shop</string>
+</resources>
