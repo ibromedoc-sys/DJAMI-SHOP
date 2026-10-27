@@ -10,7 +10,7 @@ source.exclude_dirs = .git, .buildozer, bin, venv, .venv, __pycache__, vendor, w
 
 version = 0.2
 android.numeric_version = 2
-icon.filename = %(source.dir)s/images/logo.png
+icon.filename = %(source.dir)s/images/djami-shop-icon.png
 
 requirements = python3,kivy==2.3.0,kivymd==2.0.0,materialyoucolor==3.0.3,materialshapes,asynckivy,asyncgui,pyjnius,certifi
 

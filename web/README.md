@@ -1,4 +1,4 @@
-﻿# DJAMI SHOP — tableau de bord administrateur
+# DJAMI SHOP — tableau de bord administrateur
 
 Le tableau de bord utilise Firebase Authentication et Firestore du projet
 `djami-shop`. Il n'initialise pas Firebase Storage et n'inclut aucun mot de
