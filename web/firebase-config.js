@@ -5,3 +5,5 @@
   storageBucket: "djami-shop.firebasestorage.app",
   messagingSenderId: "561310011115",
 };
+
+export const dashboardAdminUid = "CbQEgfqVxWNFuKkQhTpqL5we1jq2";

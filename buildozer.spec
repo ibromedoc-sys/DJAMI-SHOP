@@ -18,7 +18,7 @@ orientation = portrait
 fullscreen = 0
 
 android.accept_sdk_license = True
-android.api = 34
+android.api = 36
 android.minapi = 24
 android.ndk_api = 24
 android.archs = arm64-v8a
@@ -36,7 +36,7 @@ android.release_artifact = apk
 
 p4a.url = https://github.com/kivy/python-for-android.git
 p4a.branch = master
-p4a.commit = v2024.01.21
+p4a.commit = 58d21141f17c889bf8585f5665921d72028f8831
 
 
 

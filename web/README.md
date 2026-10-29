@@ -11,9 +11,13 @@ passe ni credential de compte de service.
 2. La configuration Firebase est définie dans `web/firebase-config.js` pour le
    projet DJAMI SHOP. La clé API Firebase de configuration est publique ; elle ne doit
    pas être confondue avec un credential de compte de service.
-3. Vérifier la revendication personnalisée `admin: true` du compte admin. Les
-   règles Firestore font autorité ; masquer l'interface n'est pas une
-   protection des données.
+3. Dans Authentication > Utilisateurs, copier l'UID du compte autorisé et
+   remplacer `REMPLACER_PAR_VOTRE_UID_FIREBASE` par cet UID dans
+   `web/firebase-config.js` (valeur `dashboardAdminUid`) et `firestore.rules`.
+   L'UID est un identifiant, pas un mot de passe ; les règles Firestore
+   restreignent les écritures à cet UID.
+4. Remplacer le marqueur dans les deux fichiers avant le déploiement. Tant qu'il
+   reste présent, aucun compte normal ne peut modifier les données.
 
 ## Déployer
 
@@ -64,8 +68,8 @@ par-dessus, il faudra désinstaller l'ancienne APK puis installer l'application
 depuis la piste de test Play ; les données locales peuvent être effacées.
 
 Les lectures des collections `produits`, `publications` et `contenu` sont
-publiques pour les appareils clients. Seuls les jetons portant `admin: true`
-peuvent écrire dans Firestore. Le tableau de bord conserve les contenus fixes
+publiques pour les appareils clients. Seul l'UID configuré peut écrire dans
+Firestore. Le tableau de bord conserve les contenus fixes
 dans `contenu/accueil` (textes et quatre logos) et `contenu/apropos` (titre des
 actualités, textes de la page « À propos », photo et liens du site et CONTACT).
 Les documents `produits` et `publications` peuvent stocker jusqu'à trois images
@@ -77,8 +81,8 @@ Android lit ces documents au démarrage et garde son contenu local si aucun
 document n'a encore été créé. Cette lecture à distance nécessite d'abord de publier une nouvelle
 version Android contenant cette fonctionnalité ; ensuite, modifier ces champs
 ne nécessite pas une nouvelle publication Android. Le compte admin doit se
-déconnecter puis se reconnecter (ou renouveler son jeton) après modification de
-ses claims. Le document `contenu/apropos` contient aussi `apropos_lien_url`,
+connecter avec l'UID configuré dans le tableau de bord. Le document
+`contenu/apropos` contient aussi `apropos_lien_url`,
 destination HTTPS du lien `apropos_lien_texte`; l'application l'ouvre depuis la
 page « À propos ». Sa valeur par défaut est `https://superlife-togo.com`. Le
 lien CONTACT est défini par `apropos_contact_texte` et
@@ -155,7 +159,7 @@ la vérification conditionnelle.
 - Téléversement Cloudinary d'une image JPEG, PNG ou WebP et enregistrement de
   son URL HTTPS dans Firestore.
 - Conservation de l'image existante si aucun nouveau fichier n'est sélectionné.
-- Connexion d'un compte sans `admin: true` : aucune écriture autorisée.
+- Connexion d'un autre compte Firebase : aucune écriture autorisée.
 - Affichage des URL d'images sur l'application Android et un second appareil.
 - Publication Android via une piste de test interne Google Play.
 - Ne pas déployer les règles Storage ni modifier le forfait Firebase pour

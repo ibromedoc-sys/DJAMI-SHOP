@@ -4,7 +4,6 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
-  getIdTokenResult,
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 import {
   collection,
@@ -16,7 +15,7 @@ import {
   setDoc,
   updateDoc,
 } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-import { firebaseConfig } from "./firebase-config.js";
+import { dashboardAdminUid, firebaseConfig } from "./firebase-config.js";
 
 const CLOUDINARY_CLOUD_NAME = "jvljzrue";
 const CLOUDINARY_UPLOAD_PRESET = "vente_images";
@@ -669,10 +668,9 @@ onAuthStateChanged(auth, async (user) => {
     return;
   }
   try {
-    const token = await getIdTokenResult(user, true);
-    if (token.claims.admin !== true) {
+    if (user.uid !== dashboardAdminUid) {
       await signOut(auth);
-      showNotice("Ce compte n'a pas la revendication administrateur requise.");
+      showNotice("Ce compte Firebase n'est pas autorisé pour le tableau de bord.");
       return;
     }
     $("#admin-email").textContent = user.email || "";
