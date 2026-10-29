@@ -387,8 +387,8 @@ class VenteApp(MDApp):
     accueil_description = StringProperty(
         "Découvrez nos produits et nos infos en exclusivités."
     )
-    accueil_bouton_produits = StringProperty("PRODUITS")
-    accueil_bouton_infos = StringProperty("NOS INFOS")
+    accueil_bouton_produits = StringProperty("NOS PRODUITS")
+    accueil_bouton_infos = StringProperty("NOS INFOS/PUBS")
     infos_titre = StringProperty("INFOS & ACTUALITÉS")
     apropos_titre = StringProperty("À PROPOS")
     apropos_description = StringProperty(
