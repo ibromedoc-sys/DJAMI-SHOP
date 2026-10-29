@@ -2,15 +2,6 @@ name: Build DJAMI SHOP APK
 
 on:
   workflow_dispatch:
-    inputs:
-      build_type:
-        description: debug sans signature, ou release avec secrets de signature
-        required: true
-        type: choice
-        options:
-          - debug
-          - release
-        default: debug
   push:
     branches:
       - main
@@ -70,36 +61,15 @@ jobs:
           cython --version
           python -c "import Cython; print(Cython.__version__)"
       - name: Restore signing keystore
-        if: github.event_name == 'workflow_dispatch' && inputs.build_type == 'release'
         env:
           ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
-          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
-          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
-          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: |
-          test -n "$ANDROID_KEYSTORE_BASE64" \
-            && test -n "$ANDROID_KEYSTORE_PASSWORD" \
-            && test -n "$ANDROID_KEY_ALIAS" \
-            && test -n "$ANDROID_KEY_PASSWORD" \
-            || { echo "::error::Configurez les quatre secrets Android de signature."; exit 1; }
+          test -n "$ANDROID_KEYSTORE_BASE64"
           printf '%s' "$ANDROID_KEYSTORE_BASE64" \
             | base64 --decode > "$RUNNER_TEMP/djami-shop-upload.keystore"
           chmod 600 "$RUNNER_TEMP/djami-shop-upload.keystore"
 
-      - name: Build debug APK
-        if: github.event_name == 'push' || inputs.build_type == 'debug'
-        run: buildozer -v android debug
-
-      - name: Upload debug APK
-        if: github.event_name == 'push' || inputs.build_type == 'debug'
-        uses: actions/upload-artifact@v4
-        with:
-          name: DJAMI-SHOP-Android-Debug-APK
-          path: bin/*.apk
-          if-no-files-found: error
-
       - name: Build signed release APK
-        if: github.event_name == 'workflow_dispatch' && inputs.build_type == 'release'
         env:
           P4A_RELEASE_KEYSTORE: ${{ runner.temp }}/djami-shop-upload.keystore
           P4A_RELEASE_KEYSTORE_PASSWD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
@@ -109,7 +79,6 @@ jobs:
           buildozer -v android release
 
       - name: Upload signed release APK
-        if: github.event_name == 'workflow_dispatch' && inputs.build_type == 'release'
         uses: actions/upload-artifact@v4
         with:
           name: DJAMI-SHOP-Android-Release-APK
@@ -117,5 +86,5 @@ jobs:
           if-no-files-found: error
 
       - name: Remove signing keystore
-        if: always() && github.event_name == 'workflow_dispatch' && inputs.build_type == 'release'
+        if: always()
         run: rm -f "$RUNNER_TEMP/djami-shop-upload.keystore"

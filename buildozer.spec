@@ -6,19 +6,19 @@ package.domain = com.djamishop
 
 source.dir = .
 source.include_exts = py,png,jpg,jpeg,webp,kv,atlas,json
-source.exclude_dirs = .git, .buildozer, bin, venv, .venv, __pycache__, vendor, web, p4a_recipes
+source.exclude_dirs = .git, .buildozer, bin, venv, .venv, __pycache__, vendor, web
 
 version = 0.2
 android.numeric_version = 2
 icon.filename = %(source.dir)s/images/djami-shop-icon.png
 
-requirements = python3==3.12.9,hostpython3==3.12.9,kivy==2.3.0,kivymd==2.0.0,materialyoucolor==3.0.3,materialshapes,asynckivy,asyncgui,pyjnius,certifi
+requirements = python3,kivy==2.3.0,kivymd==2.0.0,materialyoucolor==3.0.3,materialshapes,asynckivy,asyncgui,pyjnius,certifi
 
 orientation = portrait
 fullscreen = 0
 
 android.accept_sdk_license = True
-android.api = 36
+android.api = 34
 android.minapi = 24
 android.ndk_api = 24
 android.archs = arm64-v8a
@@ -34,10 +34,9 @@ android.allow_backup = True
 android.debug_artifact = apk
 android.release_artifact = apk
 
-p4a.local_recipes = %(source.dir)s/p4a_recipes
 p4a.url = https://github.com/kivy/python-for-android.git
 p4a.branch = master
-p4a.commit = 58d21141f17c889bf8585f5665921d72028f8831
+p4a.commit = v2024.01.21
 
 
 
