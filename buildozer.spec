@@ -6,7 +6,7 @@ package.domain = com.djamishop
 
 source.dir = .
 source.include_exts = py,png,jpg,jpeg,webp,kv,atlas,json
-source.exclude_dirs = .git, .buildozer, bin, venv, .venv, __pycache__, vendor, web
+source.exclude_dirs = .git, .buildozer, bin, venv, .venv, __pycache__, vendor, web, p4a_recipes
 
 version = 0.2
 android.numeric_version = 2
@@ -34,6 +34,7 @@ android.allow_backup = True
 android.debug_artifact = apk
 android.release_artifact = apk
 
+p4a.local_recipes = %(source.dir)s/p4a_recipes
 p4a.url = https://github.com/kivy/python-for-android.git
 p4a.branch = master
 p4a.commit = 58d21141f17c889bf8585f5665921d72028f8831
