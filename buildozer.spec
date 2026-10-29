@@ -12,7 +12,7 @@ version = 0.2
 android.numeric_version = 2
 icon.filename = %(source.dir)s/images/djami-shop-icon.png
 
-requirements = python3==3.13.2,hostpython3==3.13.2,kivy==2.3.0,kivymd==2.0.0,materialyoucolor==3.0.3,materialshapes,asynckivy,asyncgui,pyjnius,certifi
+requirements = python3==3.12.9,hostpython3==3.12.9,kivy==2.3.0,kivymd==2.0.0,materialyoucolor==3.0.3,materialshapes,asynckivy,asyncgui,pyjnius,certifi
 
 orientation = portrait
 fullscreen = 0
